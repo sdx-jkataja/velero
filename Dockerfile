@@ -78,5 +78,8 @@ COPY --from=velero-builder /output /
 
 COPY --from=restic-builder /output /
 
-USER cnb:cnb
+# keep user and group from previous image
+COPY --from=paketobuildpacks/run-jammy-tiny:latest /etc/passwd /etc/passwd
+COPY --from=paketobuildpacks/run-jammy-tiny:latest /etc/group /etc/group
 
+USER cnb:cnb
